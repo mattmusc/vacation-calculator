@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-unused-vars
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import Field from '../../components/Field';
@@ -57,10 +56,6 @@ const ResultContainer = styled(StyledFieldsContainer)`
   font-size: 1.5em;
   flex: ${(props: AppElementProps) => (props.width > mobileWidth ? '1 1 320px' : '1 1 100px')};
 `;
-
-type StringSetter = React.Dispatch<React.SetStateAction<string>>;
-type HTMLInputChangeEvent = ChangeEvent<HTMLInputElement>;
-type StringInputChangeFn = (setter: StringSetter) => (event: HTMLInputChangeEvent) => void;
 
 function App() {
   const days = useFloatInput(0);
