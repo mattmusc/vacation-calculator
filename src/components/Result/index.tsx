@@ -28,7 +28,7 @@ function Result(props: ResultProps) {
     <ResultDiv>
       {'You have '}
       <ResultValueDiv>
-        {value}
+        {value || 0}
       </ResultValueDiv>
       {' days left!'}
     </ResultDiv>

@@ -1,7 +1,8 @@
 // eslint-disable-next-line no-unused-vars
-import React, { ChangeEvent, Component } from 'react';
+import React, { ChangeEvent, Component, FocusEvent } from 'react';
 import styled, { keyframes } from 'styled-components';
 import useWindowSize from '../../hooks/core/useWindowSize';
+import { mobileWidth } from '../../constants';
 
 interface AppElementProps {
   width: number
@@ -9,9 +10,9 @@ interface AppElementProps {
 
 const StyledField = styled.div`
   display: flex;
-  justify-content: ${(props: AppElementProps) => (props.width > 768 ? 'flex-end' : 'center')};
+  justify-content: ${(props: AppElementProps) => (props.width > mobileWidth ? 'flex-end' : 'center')};
   align-items: baseline;
-  padding: ${(props: AppElementProps) => (props.width > 768 ? '1em' : '0 1em')};
+  padding: ${(props: AppElementProps) => (props.width > mobileWidth ? '1em' : '0 1em')};
 `;
 
 const StyledFieldLabel = styled.div`
@@ -53,14 +54,15 @@ const StyledInput = styled.input`
 
 type FieldProps = {
   label: string | Component,
-  value: number,
+  value: number | string,
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void,
+  onBlur?: (event: FocusEvent<HTMLInputElement>) => void,
 };
 
 function Field(props: FieldProps) {
   const {
     label = 'Label', value = 0, onChange = () => {
-    },
+    }, onBlur = () => {},
   } = props;
 
   const size = useWindowSize();
@@ -70,7 +72,7 @@ function Field(props: FieldProps) {
       <StyledFieldLabel>
         {label}
       </StyledFieldLabel>
-      <StyledInput type="text" value={value} onChange={onChange} />
+      <StyledInput type="number" min="0" max="1000" value={value} onChange={onChange} onBlur={onBlur} />
     </StyledField>
   );
 }
